@@ -19,7 +19,7 @@ const generateRandomUser = (): User => {
 const user1: User = {
     userID: 'M. Talha',
     userPIN: '4321',
-    balance: 1000
+    balance: Math.floor(1000 + Math.random() * 9000)
 }
 
 console.log('Welcome to MTS ATM! The soultion to all your financial worries.\n');
@@ -101,7 +101,7 @@ const launchATM: () => any = async () => {
                 } else if (decision.deposit_or_withdraw == 'Deposit') {
                     const amount = await depositAmount()
                     deposit(user, +amount.deposit_amount)
-                    console.log(`Successfuly deposited amount Rs. ${amount.deposit_amount}\n`);
+                    console.log(`Successfuly deposited amount Rs. ${amount.deposit_amount}\n\nCurrent Balance: ${user.balance}\n`);
 
                     return continueOrExit()
                     
@@ -113,7 +113,7 @@ const launchATM: () => any = async () => {
                 } else {
                     const amount = await withdrawAmount()
                     withdraw(user, +amount.withdraw_amount)
-                    console.log(`Successfuly withdrew amount Rs. ${amount.withdraw_amount}\n`);
+                    console.log(`Successfuly withdrew amount Rs. ${amount.withdraw_amount}\n\nRemaining Balance: ${user.balance}\n`);
 
                     return continueOrExit()
                 }
