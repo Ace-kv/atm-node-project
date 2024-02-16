@@ -22,8 +22,9 @@ const user1: User = {
     balance: 1000
 }
 
+console.log('Welcome to MTS ATM! The soultion to all your financial worries.\n');
+
 const atmScreen = () => {
-    console.log('Welcome to MTS ATM! The soultion to all your financial worries.\n');
     
     return inquirer.prompt([
         {
@@ -82,7 +83,7 @@ const withdrawAmount = () => {
 const deposit = (user: User, amount: number) => {user.balance += amount}
 const withdraw = (user: User, amount: number) => {user.balance -= amount}
 
-const launchATM = async () => {
+const launchATM: () => any = async () => {
     try {
         const answers = await atmScreen()
         const {userID, userPIN} = answers
@@ -120,7 +121,8 @@ const launchATM = async () => {
             
             return continueOrExit()
         }
-        return console.error('\nInvalid User Credentials')
+        console.error('\nInvalid User Credentials')
+        return launchATM()
 
     } catch (error: any) {
         if (error.isTtyError) {
